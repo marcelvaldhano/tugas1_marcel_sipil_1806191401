@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DETAIL PILOT</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(currentPageName='Pilot')"></nav>
+<div style="margin: 20px 100px 20px 100px ">
+    <table class="table table-borderless shadow-lg">
+        <thead>
+        <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Detail Pilot</b></a></div>
+        </thead>
+        <tbody>
+        <tr class="text-center">
+            <td scope="col">ID</td>
+            <td th:text="${pilot.id}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Nama</td>
+            <td th:text="${pilot.nama}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">NIK</td>
+            <td th:text="${pilot.nik}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Jenis Kelamin</td>
+            <td>
+                <div th:if="${pilot.jenisKelamin==0}">Laki-laki</div>
+                <div th:if="${pilot.jenisKelamin==1}">Perempuan</div>
+            </td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">NIP</td>
+            <td th:text="${pilot.nip}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Tempat Lahir</td>
+            <td th:text="${pilot.tempatLahir}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Tanggal Lahir</td>
+            <td th:text="${pilot.tanggalLahir}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Sekolah </td>
+            <td th:text="${pilot.akademiModel.nama}"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Maskapai </td>
+            <td th:text="${pilot.maskapaiModel.nama}"></td>
+        </tr>
+
+        <tr>
+            <td th:each="ppm: ${listPilotPenerbanganModel}" th:text="${ppm.pilotModel.nama}"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>
+                <a th:href="@{/pilot/ubah/}+${nip}" class="text-center btn btn-dark" style="float:right;margin-right: 20px">Ubah</a>
+                <a th:href="@{/pilot/delete/}+${nip}" class="btn text-center btn-danger" style="float:right;margin-right: 20px">Hapus</a>
+            </th>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

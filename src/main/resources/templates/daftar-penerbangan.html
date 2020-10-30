@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Penerbangan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(currentPageName='Daftar Penerbangan')"></nav>
+<div class="container-fluid">
+    <a th:href="@{/penerbangan/tambah/}" style="margin: 50px 0px 20px 100px" class="text-center btn btn-success">+ Tambah Penerbangan</a>
+    <div style="margin: 20px 100px 20px 100px ">
+        <table class="table">
+            <thead>
+            <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Daftar Penerbangan</b></a></div>
+            </thead>
+            <thead>
+            <tr class="text-center">
+                <th>No</th>
+                <th>Kode Penerbangan</th>
+                <th>Waktu</th>
+                <th>Kota Asal</th>
+                <th>Kota Tujuan</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="penerbangan, iterationStatus: ${listPenerbangan}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${penerbangan.kode}"></td>
+                <td th:text="${penerbangan.waktu}"></td>
+                <td th:text="${penerbangan.kotaAsal}"></td>
+                <td th:text="${penerbangan.kotaTujuan}"></td>
+                <td>
+                    <div><a th:href="@{/penerbangan/}" class="text-center btn btn-primary" style="margin: auto">Lihat</a>
+                        <a th:href="@{/penerbangan/ubah/}" class="text-center btn btn-dark" style="margin: auto">Ubah</a>
+                        <a th:href="@{/}" class="text-center btn btn-danger" style="margin: auto">Hapus</a></div>
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</div>
+</body>
+</html>

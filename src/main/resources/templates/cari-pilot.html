@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CARI PILOT</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(currentPageName='Cari-Pilot')"></nav>
+<div style="margin: 20px 100px 20px 100px ">
+    <form th:action="@{/cari/pilot/}"th:object="${pilot}" method="GET">
+    <table class="table">
+        <tr>
+            <td>
+                Pilih Kode Maskapai
+                <select class="form-control form-control-lg" style="width: 500px" name="kodeMaskapai">
+                    <option th:each="maskapai:${listMaskapai}" th:text="${maskapai.nama}" th:value="${maskapai.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pilih Kode Akademi
+                <select class="form-control form-control-lg" style="width: 500px" name="kodeAkademi">
+                    <option th:each="akademi:${listAkademi}" th:text="${akademi.nama}" th:value="${akademi.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-dark" style="float:right;margin-right: 20px">Cari</button>
+            </td>
+        </tr>
+
+        <table>
+<!--            <tr>-->
+<!--                <th:text=></th:text>-->
+<!--            </tr>-->
+            <tr th:each="pilot,iterationnumber:${listResult}">
+                <td th:text="${iterationnumber.count}"></td>
+                <td th:text="${pilot.nama}"></td>
+                <td th:text="${pilot.nip}"></td>
+            </tr>
+        </table>
+
+    </table>
+    </form>
+</div>
+</body>
+</html>

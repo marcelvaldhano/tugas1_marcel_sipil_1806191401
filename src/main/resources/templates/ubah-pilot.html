@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UBAH PILOT</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(currentPageName='Pilot')"></nav>
+<div class="container-fluid">
+    <div class="bg-dark text-center" style="height: 60px; width: 600px; border-radius: 10px; font-size: 40px; margin:auto; margin-top: 20px">
+        <a style="color: white; margin:auto">Ubah Pilot</a>
+    </div>
+</div>
+<div style="margin: auto; border: outset; border-radius: 10px; width: 600px" class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div style="margin: auto; width: 600px" >
+        <form th:action="@{/pilot/ubah}"th:object="${pilot}" method="POST">
+            <table class="table table-borderless" style="width: 600px; margin: auto">
+                <thead>
+                <tr>
+                    <input type="hidden" name="nip" th:field="*{nip}" th:value="*{nip}" />
+                    <input type="hidden" name="id" th:field="*{id}" th:value="*{id}" />
+                    <th class="form-group">
+                        Nama
+                        <input type="text"  name="nama" th:field="*{nama}" th:value="*{nama}" style="border-radius: 10px ;width: 500px" class="form-control">
+                    </th>
+                </tr>
+                <tr>
+                    <th class="form-group">
+                        NIK
+                        <input type="number" style="border-radius: 10px ;width: 500px" class="form-control" name="nik" th:field="*{nik}" th:value="*{nik}">
+                    </th>
+                </tr>
+                <tr>
+                    <th class="form-group">
+                        Tempat Lahir
+                        <input type="text" style="border-radius: 10px;width: 500px" class="form-control" name="tempatLahir" th:field="*{tempatLahir}" th:value="*{tempatLahir}">
+                    </th>
+                </tr>
+                <tr>
+                    <th class="form-group">
+                        Tanggal Lahir
+                        <input type="text" class="form-control" name="tanggalLahir" style="width: 500px" th:field="*{tanggalLahir}" th:value="*{tanggalLahir}">
+                    </th>
+                </tr>
+                <tr>
+                    <th class="form-group">
+                        Jenis Kelamin
+                        <select class="form-control form-control-lg" style="width: 500px" name="jenisKelamin" th:field="*{jenisKelamin}" th:value="*{jenisKelamin}">
+                            <option value="0">Laki-laki</option>
+                            <option value="1">Perempuan</option>
+                        </select>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th class="form-group">
+                        Sekolah
+                        <select class="form-control form-control-lg" style="width: 500px" name="akademiModel">
+                            <option value="1" th:each="akademi:${listAkademi}" th:text="${akademi.nama}" th:value="${akademi.id}"></option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="form-group">
+                        Maskapai
+                        <select class="form-control form-control-lg" style="width: 500px" name="maskapaiModel">
+                            <option value="1" th:each="maskapai:${listMaskapai}" th:text="${maskapai.nama}" th:value="${maskapai.id}"></option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <button type="submit" class="btn btn-dark" style="float:right;margin-right: 20px">Update</button>
+                        <button type="submit" class="btn btn-outline-danger" style="float:right;margin-right: 20px">Batal</button>
+
+                    </th>
+                </tr>
+
+                </thead>
+            </table>
+        </form>
+    </div>
+
+    <hr>
+</div>
+
+</body>
+</html>

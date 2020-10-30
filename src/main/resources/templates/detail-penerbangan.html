@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Penerbangan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(currentPageName='Detail Penerbangan')"></nav>
+<div style="margin: 20px 100px 20px 100px ">
+    <table class="table">
+        <thead>
+        <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Detail Pilot</b></a></div>
+        </thead>
+        <tbody>
+        <tr class="text-center">
+            <td scope="col">ID</td>
+            <td th:text="${pilot.id}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Kode Penerbangan</td>
+            <td th:text="${pilot.nama}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Waktu</td>
+            <td th:text="${pilot.nama}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Kota Asal</td>
+            <td th:text="${pilot.nama}" scope="col"></td>
+        </tr>
+
+        <tr class="text-center">
+            <td scope="col">Kode Tujuan</td>
+            <td th:text="${pilot.nama}" scope="col"></td>
+        </tr>
+
+</body>
+</html>
