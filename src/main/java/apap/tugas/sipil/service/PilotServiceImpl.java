@@ -45,8 +45,9 @@ public class PilotServiceImpl implements PilotService{
     }
 
     @Override
-    public List<PilotModel> getPilotByIdAkademiAndKodeMaskapai(Long kodeMaskapai, Long idSekolah){
+    public List<PilotModel> getPilotByIdAkademiAndKodeMaskapai(String kodeMaskapai, Long idSekolah){
         List<PilotModel> hasil=new ArrayList<PilotModel>();
+
         for(PilotModel pilot:getPilotList()){
             if(pilot.getMaskapaiModel().getKode().equals(kodeMaskapai)||pilot.getAkademiModel().getId().equals(idSekolah)){
                 hasil.add(pilot);

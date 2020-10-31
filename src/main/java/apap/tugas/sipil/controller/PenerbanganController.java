@@ -136,19 +136,23 @@ public class PenerbanganController {
 
 
     @GetMapping("cari/pilot/")
-    public String cari(Model model, @RequestParam(name = "kodeMaskapai", required = false) Long kodeMaskapai,
+    public String cari(Model model, @RequestParam(name = "kodeMaskapai", required = false) String kodeMaskapai,
                        @RequestParam(name = "idSekolah", required = false)  Long idSekolah
     ){
         boolean validasi=false;
         if(kodeMaskapai!=null && idSekolah!=null){
             validasi=true;
         }
+
         model.addAttribute("validasi",validasi);
         model.addAttribute("listResult", pilotService.getPilotByIdAkademiAndKodeMaskapai(kodeMaskapai,idSekolah));
         model.addAttribute("listMaskapai",maskapaiService.getMaskapaiList());
         model.addAttribute("listAkademi",akademisService.getAkademiList());
+
         return "cari-pilot";
     }
+
+
 
 
 }

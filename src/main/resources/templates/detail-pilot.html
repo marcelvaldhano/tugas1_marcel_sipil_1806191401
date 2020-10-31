@@ -63,15 +63,39 @@
         </tr>
 
         <tr>
-            <td th:each="ppm: ${listPilotPenerbanganModel}" th:text="${ppm.pilotModel.nama}"></td>
-        </tr>
-        <tr>
             <th></th>
             <th>
                 <a th:href="@{/pilot/ubah/}+${nip}" class="text-center btn btn-dark" style="float:right;margin-right: 20px">Ubah</a>
                 <a th:href="@{/pilot/delete/}+${nip}" class="btn text-center btn-danger" style="float:right;margin-right: 20px">Hapus</a>
             </th>
         </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-borderless shadow-lg">
+        <thead>
+        <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Jadwal Bertugas</b></a></div>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <td>No</td>
+                <td>Kode Penerbangan</td>
+                <td>Waktu</td>
+                <td>Kota Asal</td>
+                <td>Kota Tujuan</td>
+                <td>Action</td>
+            </tr>
+            <tr th:each="list,iterationStatus: ${listPilotPenerbangan}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${list.penerbanganModel.kode}"></td>
+                <td th:text="${list.penerbanganModel.waktu}"></td>
+                <td th:text="${list.penerbanganModel.kotaAsal}"></td>
+                <td th:text="${list.penerbanganModel.kotaTujuan}"></td>
+                <td>
+                    <a th:href="@{/penerbangan/detail/}+${list.penerbanganModel.id}" class="text-center btn btn-dark" style="float:center;margin-right: 30px">Lihat</a>
+                </td>
+
+            </tr>
 
         </tbody>
     </table>

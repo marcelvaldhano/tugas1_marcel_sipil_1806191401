@@ -2,6 +2,7 @@ package apap.tugas.sipil.controller;
 
 import apap.tugas.sipil.model.MaskapaiModel;
 import apap.tugas.sipil.model.PenerbanganModel;
+import apap.tugas.sipil.model.PilotPenerbanganModel;
 import apap.tugas.sipil.repository.PilotDb;
 import apap.tugas.sipil.service.AkademisService;
 import apap.tugas.sipil.service.MaskapaiService;
@@ -76,9 +77,12 @@ public class PilotController {
             @PathVariable String nip,
             Model model
     ){
+
             PilotModel pilot=pilotService.getPilotByNip(nip);
+            List<PilotPenerbanganModel> listPilotPenerbangan=pilot.getPilotPenerbanganModel();
+
             model.addAttribute("pilot",pilot);
-            model.addAttribute("listPilotPenerbanganModel", pilot.getPilotPenerbanganModel());
+            model.addAttribute("listPilotPenerbangan", listPilotPenerbangan);
             return "detail-pilot";
     }
 

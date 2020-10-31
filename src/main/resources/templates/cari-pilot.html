@@ -14,38 +14,55 @@
         <tr>
             <td>
                 Pilih Kode Maskapai
-                <select class="form-control form-control-lg" style="width: 500px" name="kodeMaskapai">
-                    <option th:each="maskapai:${listMaskapai}" th:text="${maskapai.nama}" th:value="${maskapai.id}"></option>
+                <select class="form-control form-control-lg" style="width: 300px" name="kodeMaskapai">
+                    <option value="">----Kode Maskapai----</option>
+                    <option th:each="maskapai:${listMaskapai}" th:text="${maskapai.nama}" th:value="${maskapai.kode}"></option>
                 </select>
             </td>
-        </tr>
-        <tr>
+
             <td>
                 Pilih Kode Akademi
-                <select class="form-control form-control-lg" style="width: 500px" name="kodeAkademi">
+                <select class="form-control form-control-lg" style="width: 300px" name="kodeAkademi">
+                    <option value="">----Kode Akademi----</option>
                     <option th:each="akademi:${listAkademi}" th:text="${akademi.nama}" th:value="${akademi.id}"></option>
                 </select>
             </td>
         </tr>
         <tr>
+            <td></td>
             <td>
                 <button type="submit" class="btn btn-dark" style="float:right;margin-right: 20px">Cari</button>
             </td>
         </tr>
 
-        <table>
-<!--            <tr>-->
-<!--                <th:text=></th:text>-->
-<!--            </tr>-->
-            <tr th:each="pilot,iterationnumber:${listResult}">
-                <td th:text="${iterationnumber.count}"></td>
-                <td th:text="${pilot.nama}"></td>
-                <td th:text="${pilot.nip}"></td>
-            </tr>
-        </table>
 
     </table>
     </form>
+</div>
+<div style="margin: 20px 100px 20px 100px; border: outset; border-radius:10px" class="shadow-lg ">
+    <table class="table">
+        <thead>
+        <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Daftar Pilot Berdasarkan Maskapai atau Sekolah</b></a></div>
+        </thead>
+
+        <tr class="text-center">
+            <td>
+                <b>NO</b>
+            </td>
+            <td>
+                <b>NAMA</b>
+            </td>
+            <td>
+                <b>NIP</b>
+            </td>
+
+        </tr>
+        <tr th:each="pilot,iterationnumber:${listResult}" class="text-center">
+            <td th:text="${iterationnumber.count}"></td>
+            <td th:text="${pilot.nama}"></td>
+            <td th:text="${pilot.nip}"></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

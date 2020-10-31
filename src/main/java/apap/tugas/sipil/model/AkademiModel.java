@@ -13,8 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "akademi")
 public class AkademiModel implements Serializable {
-   @Id
-    @Size(max = 20)
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
