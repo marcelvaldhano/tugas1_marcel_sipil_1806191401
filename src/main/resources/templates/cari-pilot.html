@@ -12,6 +12,10 @@
     <form th:action="@{/cari/pilot/}"th:object="${pilot}" method="GET">
     <table class="table">
         <tr>
+
+            <a th:href="@{/cari/pilot/penerbangan-terbanyak}" class="text-center btn btn-dark" style="float:right;margin-right: 30px">Cari Pilot</a>
+        </tr>
+        <tr>
             <td>
                 Pilih Kode Maskapai
                 <select class="form-control form-control-lg" style="width: 300px" name="kodeMaskapai">
@@ -31,6 +35,7 @@
         <tr>
             <td></td>
             <td>
+
                 <button type="submit" class="btn btn-dark" style="float:right;margin-right: 20px">Cari</button>
             </td>
         </tr>

@@ -107,10 +107,11 @@ public class PilotController {
     }
     @RequestMapping("pilot/delete/{nip}")
     public String deletePilotSubmit(
-            @PathVariable String nip){
+            @PathVariable String nip, Model model){
                 PilotModel pilot=pilotService.getPilotByNip(nip);
                 pilotService.deletePilot(pilot);
-                return "home";
+                model.addAttribute("nipPilot", pilot.getNip());
+                return "delete-done";
     }
 
 

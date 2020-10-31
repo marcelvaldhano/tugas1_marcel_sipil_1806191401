@@ -152,6 +152,20 @@ public class PenerbanganController {
         return "cari-pilot";
     }
 
+    @GetMapping("cari/pilot/penerbangan-terbanyak")
+    public String caripilot(Model model, @RequestParam(name = "kodeMaskapai", required = false) String kodeMaskapai
+    ){
+        boolean validasi=false;
+        if(kodeMaskapai!=null){
+            validasi=true;
+        }
+
+        model.addAttribute("validasi",validasi);
+        model.addAttribute("listMaskapai",maskapaiService.getMaskapaiList());
+
+        return "cari-terbanyak";
+    }
+
 
 
 
