@@ -8,36 +8,103 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar(currentPageName='Detail Penerbangan')"></nav>
-<div style="margin: 20px 100px 20px 100px ">
+<div style="margin: 20px 100px 20px 100px; border: outset; border-radius:10px" class="shadow-lg ">
     <table class="table">
         <thead>
-        <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Detail Pilot</b></a></div>
+        <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Detail Penerbangan</b></a></div>
         </thead>
         <tbody>
         <tr class="text-center">
             <td scope="col">ID</td>
-            <td th:text="${pilot.id}" scope="col"></td>
+            <td th:text="${id}" scope="col"></td>
         </tr>
 
         <tr class="text-center">
             <td scope="col">Kode Penerbangan</td>
-            <td th:text="${pilot.nama}" scope="col"></td>
+            <td th:text="${listPenerbangan.kode}" scope="col"></td>
         </tr>
 
         <tr class="text-center">
             <td scope="col">Waktu</td>
-            <td th:text="${pilot.nama}" scope="col"></td>
+            <td th:text="${listPenerbangan.waktu}" scope="col"></td>
         </tr>
 
         <tr class="text-center">
             <td scope="col">Kota Asal</td>
-            <td th:text="${pilot.nama}" scope="col"></td>
+            <td th:text="${listPenerbangan.kotaAsal}" scope="col"></td>
         </tr>
 
         <tr class="text-center">
             <td scope="col">Kode Tujuan</td>
-            <td th:text="${pilot.nama}" scope="col"></td>
+            <td th:text="${listPenerbangan.kotaTujuan}" scope="col"></td>
         </tr>
 
+        <tr>
+            <th></th>
+            <th>
+                <a th:href="@{/penerbangan/ubah/}+${id}" class="text-center btn btn-dark" style="float:right;margin-right: 20px">Ubah</a>
+                <a th:href="@{/penerbangan/hapus/}+${id}" class="btn text-center btn-danger" style="float:right;margin-right: 20px">Hapus</a>
+            </th>
+        </tr>
+
+        </tbody></table>
+</div>
+<div style="margin: 20px 100px 20px 100px">
+    <table class="table table-borderless">
+        <form th:action="@{/penerbangan/}+${id}+@{/pilot/tambah/}"th:object="${pilot}" method="POST">
+        <tr>
+            <th><a style="font-size: 18px; color: black"><b>Pilih Pilot</b></a></th>
+        </tr>
+        <tr>
+            <th>
+                <select class="form-control form-control-lg" style="width: 250px" name="pilotModel">
+                    <option value="">---Pilih Pilot---</option>
+                    <option th:each="pilot:${listPilot}" th:text="${pilot.nama}" th:value="${pilot.id}"></option>
+                </select>
+                </th>
+            <th>
+                <button type="submit" class="btn btn-dark" style="float:right;margin-right: 20px">Tambah</button>
+            </th>
+        </tr>
+        </form>
+    </table>
+    <div style="margin: 20px 100px 20px 100px; border: outset; border-radius:10px" class="shadow-lg ">
+        <div>
+            <div style="margin: 20px 100px 20px 100px ; border: outset; border-radius:10px" class="shadow-lg">
+                <table class="table">
+                    <thead>
+                    <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Daftar Pilot</b></a></div>
+                    </thead>
+                    <thead>
+                    <tr class="text-center">
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NIP</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Tanggal Penugasan</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="list, iterationStatus: ${listPilotPenerbangan}">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${list.pilotModel.nama}"></td>
+                        <td th:text="${list.pilotModel.nip}"></td>
+                        <td th:text="${list.pilotModel.tanggalLahir}"></td>
+                        <td th:if="${list.pilotModel.jenisKelamin==0}">Laki-laki</td>
+                        <td th:if="${list.pilotModel.jenisKelamin==1}">Perempuan</td>
+                        <td th:text="${list.tanggalPenugasan}"></td>
+
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 </body>
 </html>

@@ -10,7 +10,7 @@
 <nav th:replace="fragments/fragment :: navbar(currentPageName='Daftar Penerbangan')"></nav>
 <div class="container-fluid">
     <a th:href="@{/penerbangan/tambah/}" style="margin: 50px 0px 20px 100px" class="text-center btn btn-success">+ Tambah Penerbangan</a>
-    <div style="margin: 20px 100px 20px 100px ">
+    <div style="margin: 20px 100px 20px 100px; border: outset; border-radius:10px" class="shadow-lg">
         <table class="table">
             <thead>
             <div class="bg-dark text-center"><a style="font-size: 30px; color: white"><b>Daftar Penerbangan</b></a></div>
@@ -33,9 +33,9 @@
                 <td th:text="${penerbangan.kotaAsal}"></td>
                 <td th:text="${penerbangan.kotaTujuan}"></td>
                 <td>
-                    <div><a th:href="@{/penerbangan/}" class="text-center btn btn-primary" style="margin: auto">Lihat</a>
-                        <a th:href="@{/penerbangan/ubah/}" class="text-center btn btn-dark" style="margin: auto">Ubah</a>
-                        <a th:href="@{/}" class="text-center btn btn-danger" style="margin: auto">Hapus</a></div>
+                    <div><a th:href="@{/penerbangan/detail/}+${penerbangan.id}" class="text-center btn btn-primary" style="margin: auto">Lihat</a>
+                        <a th:href="@{/penerbangan/ubah/}+${penerbangan.id}" class="text-center btn btn-dark" style="margin: auto">Ubah</a>
+                        <a th:href="@{/penerbangan/hapus/}+${penerbangan.id}" class="text-center btn btn-danger" style="margin: auto">Hapus</a></div>
                 </td>
 
             </tr>

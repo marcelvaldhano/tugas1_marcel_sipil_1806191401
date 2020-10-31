@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add done</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(currentPageName='Done Update')"></nav>
+<div class="text-center" style="margin: auto">
+    <h2 th:text="'Penerbangan dengan kode ' + ${kodePenerbangan}"></h2>
+    <h2 th:text="' berhasil diupdate.'"></h2>
+    <a href="/penerbangan/">Kembali ke Daftar Penerbangan</a>
+</div>
+
+
+
+</body>
+</html>

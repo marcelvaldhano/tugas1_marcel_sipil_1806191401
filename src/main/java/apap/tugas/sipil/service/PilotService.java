@@ -9,6 +9,7 @@ public interface PilotService {
     void deletePilot(PilotModel pilot);
     public List<PilotModel> getPilotByIdAkademiAndKodeMaskapai(Long kodeMaskapai, Long idSekolah);
 
+    PilotModel getPilotById(Long id);
     PilotModel updatePilot(PilotModel pilot);
     PilotModel getPilotByNip(String nip);
     List<PilotModel> getPilotList();

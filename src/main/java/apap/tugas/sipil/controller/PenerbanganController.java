@@ -2,20 +2,19 @@ package apap.tugas.sipil.controller;
 
 import apap.tugas.sipil.model.PenerbanganModel;
 import apap.tugas.sipil.model.PilotModel;
-import apap.tugas.sipil.repository.AkademiDb;
-import apap.tugas.sipil.repository.MaskapaiDb;
-import apap.tugas.sipil.repository.PenerbanganDb;
-import apap.tugas.sipil.repository.PilotDb;
-import apap.tugas.sipil.service.AkademisService;
-import apap.tugas.sipil.service.MaskapaiService;
-import apap.tugas.sipil.service.PenerbanganService;
-import apap.tugas.sipil.service.PilotService;
+import apap.tugas.sipil.model.PilotPenerbanganModel;
+import apap.tugas.sipil.repository.*;
+import apap.tugas.sipil.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +34,7 @@ public class PenerbanganController {
     @Autowired
     public MaskapaiDb maskapaiDb;
 
+
     @Qualifier("akademiServiceImpl")
     @Autowired
     AkademisService akademisService;
@@ -47,6 +47,12 @@ public class PenerbanganController {
     @Autowired
     public PenerbanganDb penerbanganDb;
 
+    @Qualifier("pilotPenerbanganServiceImpl")
+    @Autowired
+    PilotPenerbanganService pilotPenerbanganService;
+    @Autowired
+    public PilotPenerbanganDb pilotPenerbanganDb;
+
     @GetMapping("/penerbangan")
     public String listPenerbangan(Model model){
         List<PenerbanganModel> listPenerbangan=penerbanganService.getPenerbanganList();
@@ -56,11 +62,35 @@ public class PenerbanganController {
 
     @GetMapping("/penerbangan/detail/{id}")
     public String detailPenerbangan(
-            @PathVariable String nip,
+            @PathVariable Long id,
             Model model){
-        List<PenerbanganModel> listPenerbangan=penerbanganService.getPenerbanganList();
+        PenerbanganModel listPenerbangan=penerbanganService.getPenerbanganById(id);
+
+        List<PilotPenerbanganModel> listPilotPenerbangan=listPenerbangan.getPilotPenerbanganModel();
+        model.addAttribute("listPilotPenerbangan",listPilotPenerbangan);
         model.addAttribute("listPenerbangan", listPenerbangan);
-        return "daftar-penerbangan";
+        model.addAttribute("listPilot", pilotService.getPilotList());
+        return "detail-penerbangan";
+    }
+
+    @PostMapping("/penerbangan/{id}/pilot/tambah")
+    public String addPilotPenerbangan(
+            @PathVariable Long id, @RequestParam(name = "pilotModel", required = false) Long idPilot,
+            Model model){
+        PilotPenerbanganModel pilotPenerbanganModel=new PilotPenerbanganModel();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        dateFormat.format(date);
+        pilotPenerbanganModel.setTanggalPenugasan(date);
+
+        pilotPenerbanganModel.setPenerbanganModel(penerbanganService.getPenerbanganById(id));
+        pilotPenerbanganModel.setPilotModel(pilotService.getPilotById(idPilot));
+
+
+        pilotPenerbanganService.addPilotPenerbangan(pilotPenerbanganModel);
+        model.addAttribute("pilotpenerbangan",pilotPenerbanganModel);
+        return "add-pilot-penerbangan";
     }
 
     @GetMapping("penerbangan/tambah")
@@ -77,6 +107,33 @@ public class PenerbanganController {
         model.addAttribute("kode",penerbangan.getKode());
         return "add-penerbangan-done";
     }
+    
+    @GetMapping("penerbangan/hapus/{id}")
+    public String deletePilotSubmit(
+            @PathVariable Long id, Model model){
+        PenerbanganModel penerbangan=penerbanganService.getPenerbanganById(id);
+        penerbanganService.deletePenerbangan(penerbangan);
+        model.addAttribute("kode",penerbangan.getKode());
+        return "delete-penerbangan";
+    }
+
+    @GetMapping("penerbangan/ubah/{id}")
+    public String ubahPenerbangan(
+            @PathVariable Long id, Model model
+    ){
+            PenerbanganModel penerbangan=penerbanganService.getPenerbanganById(id);
+            model.addAttribute("penerbangan",penerbangan);
+            return "ubah-penerbangan";
+    }
+
+    @PostMapping("/penerbangan/ubah")
+    public String ubahPenerbanganSubmit(
+            @ModelAttribute PenerbanganModel penerbangan, Model model){
+        PenerbanganModel penerbanganUpdated=penerbanganService.updatePenerbangan(penerbangan);
+        model.addAttribute("kodePenerbangan",penerbanganUpdated.getKode());
+        return "ubah-penerbangan-done";
+    }
+
 
     @GetMapping("cari/pilot/")
     public String cari(Model model, @RequestParam(name = "kodeMaskapai", required = false) Long kodeMaskapai,

@@ -7,7 +7,7 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar(currentPageName='Pilot')"></nav>
+<nav th:replace="fragments/fragment :: navbar(currentPageName='Ubah Pilot')"></nav>
 <div class="container-fluid">
     <div class="bg-dark text-center" style="height: 60px; width: 600px; border-radius: 10px; font-size: 40px; margin:auto; margin-top: 20px">
         <a style="color: white; margin:auto">Ubah Pilot</a>
@@ -73,7 +73,7 @@
                 <tr>
                     <th>
                         <button type="submit" class="btn btn-dark" style="float:right;margin-right: 20px">Update</button>
-                        <button type="submit" class="btn btn-outline-danger" style="float:right;margin-right: 20px">Batal</button>
+                        <a th:href="@{/pilot}" class="btn btn-outline-danger" style="float:right;margin-right: 20px">Batal</button>
 
                     </th>
                 </tr>

@@ -1,5 +1,6 @@
 package apap.tugas.sipil.service;
 import apap.tugas.sipil.model.PenerbanganModel;
+import apap.tugas.sipil.model.PilotModel;
 import apap.tugas.sipil.repository.PenerbanganDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,15 @@ public class PenerbanganServiceImpl implements PenerbanganService {
     @Override
     public List<PenerbanganModel> getPenerbanganList() {
         return penerbanganDb.findAll();
+    }
+
+    @Override
+    public PenerbanganModel getPenerbanganById(Long id){
+        return penerbanganDb.findById(id).get();
+    }
+
+    @Override
+    public PenerbanganModel updatePenerbangan(PenerbanganModel penerbangan){
+        return penerbanganDb.save(penerbangan);
     }
 }
